@@ -4,6 +4,7 @@ import SubPage from "@/components/SubPage";
 import MainView from "@/views/MainView";
 import MainPage from "@/components/MainPage";
 import LoginView from "@/views/LoginView";
+import RegisterView from "@/views/RegisterView";
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,12 @@ const routes = [
     name: 'login',
     meta: { title: 'login' },
     component: LoginView
+  },
+  {
+    path: '/register',
+    name: 'register',
+    meta: { title: 'register' },
+    component: RegisterView
   },
 ]
 

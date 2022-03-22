@@ -10,7 +10,8 @@ import {Message} from "element-ui";
 router.beforeEach( (to, from, next) => {
     console.log("在这里做权限判断,一般是请求一个token")
     NProgress.start()
-    if (to.meta['title'] === 'login'){  // 如果请求登录页面直接请求
+    if (to.meta['title'] === 'login'  || to.meta['title'] === 'register'){
+        // 如果请求登录注册页面直接请求
         next()
         NProgress.done()
     } else {

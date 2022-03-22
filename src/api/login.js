@@ -23,3 +23,11 @@ export function getUserInfo(){
     })
 }
 
+export function register(data){
+    return request({
+        url: '/register',
+        method: 'POST',
+        data
+    })
+}
+
