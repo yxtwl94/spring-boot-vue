@@ -21,6 +21,7 @@
 
 <script>
 import {login} from "@/api/login";
+import {Message} from "element-ui";
 
 export default {
   name: "LoginPage",
@@ -49,8 +50,23 @@ export default {
           // expire 为0代表回话有效期
           _this.$cookies.set("user_token", res.data.data, 0)
           _this.$router.replace('main')
+        } else {
+          Message({
+            message: '登陆失败，用户密码错误',
+            type: 'error',
+            duration: 5*1000
+          })
         }
-      })
+      }).catch(
+          () =>{
+            Message({
+              message: '登陆失败，请重新登陆',
+              type: 'warning',
+              duration: 5*1000
+            })
+          }
+
+      )
     }
   }
 }
