@@ -15,6 +15,8 @@ service.interceptors.request.use(
    config =>{
        // 请求之前在这里处理，把cookie的user_token加到header里
        // 添加token到请求头
+       // 如果是登陆或者注册不要带token请求头，直接放行
+
        const cookies = document.cookie  // _ga=GA1.1.1053150339.1601784951; user_token=user_token_value
        // 1、分割cookie
        const cookie_array = cookies.split(";")
@@ -28,8 +30,14 @@ service.interceptors.request.use(
                break
            }
        }
-       config.headers['user_token'] = token
-       return config;
+       // 如果是login注册不需要带请求头
+       if (config.url === '/login'  || config.url === '/register'){
+           return config;
+       } else {
+           config.headers['user_token'] = token
+           return config;
+       }
+
    },
    error => {
        // 请求失败在这里处理
