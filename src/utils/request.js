@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { Message } from 'element-ui'
 // import {verifyToken} from "@/api/login";
 // import store from '@/store'
 // import { getToken } from '@/utils/auth'
@@ -34,7 +33,7 @@ service.interceptors.request.use(
    },
    error => {
        // 请求失败在这里处理
-       console.log("API请求失败",error);
+       console.error("【API请求失败】",error);
        return Promise.reject(error)
    },
 
@@ -46,20 +45,13 @@ service.interceptors.response.use(
         const res = response.data;
         // 如果返回code不是200，则弹错误提示
         if (res.code !== 200){
-            Message({
-                message: "【API】" + res.message || '【API】Error',
-                type: 'error',
-                duration: 5*1000
-            })
+            console.error("响应码不是200：",res)
         }
         return response;
     },
-    error => { // for debug
-        Message({
-            message: error.response.data.message || "【API】服务器异常",
-            type: 'error',
-            duration: 5 * 1000
-        })
+    error => {
+        // for debug
+        console.error("API响应错误信息：", error)
         return Promise.reject(error) //接口500抛出异常（不走页面逻辑）
     }
 )

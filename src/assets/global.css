@@ -13,6 +13,7 @@ html,body,#app{
 .el-aside{
     width: auto !important;
 }
-
-
-
+/*el form左边标签的样式*/
+.el-form-item__label{
+    color: white;
+}
