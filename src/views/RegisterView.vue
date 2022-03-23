@@ -18,10 +18,11 @@
       <el-form-item label="昵称" prop="nickname">
         <el-input v-model="ruleForm.nickname"></el-input>
       </el-form-item>
-      <el-form-item size="large">
-        <el-button type="success" @click="submitForm('ruleForm')">注册</el-button>
-      </el-form-item>
     </el-form>
+    <el-row>
+      <el-button type="primary" @click="toLogInPage">返回</el-button>
+      <el-button type="success" @click="submitForm('ruleForm')">注册</el-button>
+    </el-row>
   </div>
 </template>
 
@@ -32,6 +33,10 @@ import {Message} from "element-ui";
 export default {
   name: "RegisterView",
   methods:{
+    toLogInPage(){
+      const _this = this
+      _this.$router.push("/login")
+    },
     submitForm(formName){
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -42,21 +47,21 @@ export default {
           }
           register(user_json).then((res)=>{
             console.log(res)
-            Message({
-              message: "注册成功",
-              type: 'success',
-              duration: 5 * 1000
-            })
-            this.$router.push("/login")
-          }).catch(
-              ()=>{
-                Message({
-                  message: "注册失败，请检查用户名",
-                  type: 'error',
-                  duration: 5 * 1000
-                })
-              }
-          )
+            if (res.data.code === 200){
+              Message({
+                message: "注册成功",
+                type: 'success',
+                duration: 5 * 1000
+              })
+              this.$router.push("/login")
+            } else {
+              Message({
+                message: "注册失败:" + res.data.message,
+                type: 'error',
+                duration: 5 * 1000
+              })
+            }
+          })
         } else {
           Message({
             message: "请确认输入",

@@ -6,7 +6,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     // 存储状态值
     state: {
-        nickname: ""
+        nickname: "",
+        username: ""
     },
     // 状态值的改变方法,操作状态值
     // 提交mutations是更改Vuex状态的唯一方法
@@ -14,13 +15,14 @@ const store = new Vuex.Store({
         setNickName(state, nickname){
             state.nickname = nickname;
         },
+        setUserName(state, username){
+            state.username = username;
+        },
     },
     // 在store中定义getters（可以认为是store的计算属性）。Getters接收state作为其第一个函数
     getters: {
-        nickname: state => state.nickname,
     },
     actions: {
-
     }
 })
 // 要改变状态值只能通过提交mutations来完成

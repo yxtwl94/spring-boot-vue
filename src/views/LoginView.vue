@@ -1,14 +1,15 @@
 <template>
   <div class="login-view">
-    <LoginPage class="login"></LoginPage>
+    <Login class="login"></Login>
   </div>
 </template>
 
 <script>
-import LoginPage from "@/components/LoginPage";
+import Login from "@/components/LoginComp";
 export default {
   name: "LoginView",
-  components: {LoginPage},
+  // eslint-disable-next-line vue/no-unused-components
+  components: {Login},
   data(){
     return{
     }

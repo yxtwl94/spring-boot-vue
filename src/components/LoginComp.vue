@@ -24,7 +24,7 @@ import {login} from "@/api/login";
 import {Message} from "element-ui";
 
 export default {
-  name: "LoginPage",
+  name: "LoginComp",
   data(){
     return{
       username: "",
@@ -49,7 +49,7 @@ export default {
         if (res.data.code === 200){
           // expire 为0代表回话有效期
           _this.$cookies.set("user_token", res.data.data, 0)
-          _this.$router.replace('main')
+          _this.$router.push('/main')
         } else {
           Message({
             message: '登陆失败，用户密码错误',

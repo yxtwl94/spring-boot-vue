@@ -27,7 +27,7 @@
 <script>
 
 export default {
-  name: 'MainPage',
+  name: 'MainComp',
   mounted() {
     const _this = this
     console.log("获取到的nickName:",_this.$store.state.nickname)

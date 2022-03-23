@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import SubPage from "@/components/SubPage";
 import MainView from "@/views/MainView";
-import MainPage from "@/components/MainPage";
 import LoginView from "@/views/LoginView";
 import RegisterView from "@/views/RegisterView";
+import MainComp from "@/components/MainComp";
+import ProfileComp from "@/components/ProfileComp";
+import SubComp from "@/components/SubComp";
 
 Vue.use(VueRouter)
 
@@ -19,13 +20,19 @@ const routes = [
         path: '/main',
         name: 'main',
         meta: { title: 'main' },
-        component: MainPage
+        component: MainComp
       },
       {
         path: '/sub',
         name: 'sub',
         meta: { title: 'sub' },
-        component: SubPage
+        component: SubComp
+      },
+      {
+        path: '/profile',
+        name: 'profile',
+        meta: { title: 'profile' },
+        component: ProfileComp
       },
     ]
   },
@@ -41,6 +48,7 @@ const routes = [
     meta: { title: 'register' },
     component: RegisterView
   },
+
 ]
 
 const router = new VueRouter({

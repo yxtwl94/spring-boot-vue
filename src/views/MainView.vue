@@ -35,7 +35,7 @@
         <el-header>
           <el-row style="width: 100%;display: flex;align-items: center;">
             <el-col :span="1">
-              <div @click="fold" style="font-size: 25px;cursor:pointer;">
+              <div @click="fold" style="font-size: 25px;cursor:pointer; color: black">
                 <i class="el-icon-s-fold" v-show="!showFoldIcon"></i>
                 <i class="el-icon-s-unfold" v-show="showFoldIcon"></i>
               </div>
@@ -46,7 +46,7 @@
                   {{this.$store.state.nickname}}<i class="el-icon-arrow-down el-icon--right"></i>
                 </span>
                 <el-dropdown-menu slot="dropdown">
-                  <el-dropdown-item command="userInfo">个人中心</el-dropdown-item>
+                  <el-dropdown-item command="profile">个人中心</el-dropdown-item>
                   <el-dropdown-item command="logout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
@@ -77,7 +77,11 @@ export default {
       switch (cmd){
         case "logout":
           logout()
-          _this.$router.push({path: '/login'})
+          _this.$router.push('/login')
+          break
+        case "profile":
+          _this.$router.push('/profile')
+          break
       }
     },
     logout(){
@@ -86,7 +90,7 @@ export default {
   },
   data(){
     return{
-      showFoldIcon: true
+      showFoldIcon: false
     }
   }
 }
@@ -94,7 +98,7 @@ export default {
 
 <style scoped>
 .el-header, .el-footer {
-  background-color: #1d66af;
+  background-color: whitesmoke;
   color: #ffff;
   text-align: center;
   height: 50px;
@@ -112,8 +116,9 @@ export default {
   height: 100%;
   font-size: large;
 }
+/*右上角头像*/
 .el-dropdown-link {
-  color: #FFFF;
+  color: black;
   height: 100%;
   cursor:pointer;
 }

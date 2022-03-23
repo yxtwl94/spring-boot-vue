@@ -18,9 +18,9 @@ router.beforeEach( (to, from, next) => {
         // 根据token获取用户信息(token会自动加到header上所以不需要传入)
         getUserInfo().then((res)=>{
             // console.log("获取到用户信息", res.data)
-            const nickname = res.data.data.nickname
             // 存入全局变量store里
-            store.commit("setNickName", nickname)
+            store.commit("setNickName", res.data.data.nickname)
+            store.commit("setUserName", res.data.data.username)
             next()
             NProgress.done()
         }).catch(()=>{

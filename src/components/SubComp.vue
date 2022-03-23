@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "SubPage"
+  name: "SubComp"
 }
 </script>
 
