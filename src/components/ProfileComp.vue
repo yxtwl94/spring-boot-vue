@@ -29,6 +29,9 @@
         <div class="item">
           昵称： {{this.$store.state.nickname}}
         </div>
+        <div class="item">
+          权限： {{this.$store.state.role}}
+        </div>
       </el-card>
     </el-main>
   </div>
@@ -58,27 +61,36 @@ export default {
         "nickname": this.nickname,
       }
       editUser(json).then(
-          ()=>{
+        (res)=> {
+          if (res.data.code === 200){
             Message({
               message: '修改成功',
               type: 'success',
               duration: 5*1000
             })
             store.commit("setNickName", this.nickname)
-            this.showDialog = false
+          } else{
+            if (res.data.code === 403){
+              Message({
+                message: '修改失败，权限认证失败',
+                type: 'warning',
+                duration: 5*1000
+              })
+            }
           }
-      ).catch(
+          this.showDialog = false
+        }).catch(
           ()=>{
             Message({
               message: '操作失败，请重试',
               type: 'error',
               duration: 5*1000
             })
+            this.showDialog = false
           }
       )
 
     },
-
   },
   data(){
     return{

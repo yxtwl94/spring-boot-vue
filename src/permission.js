@@ -21,6 +21,7 @@ router.beforeEach( (to, from, next) => {
             // 存入全局变量store里
             store.commit("setNickName", res.data.data.nickname)
             store.commit("setUserName", res.data.data.username)
+            store.commit("setRole", res.data.data.role)
             next()
             NProgress.done()
         }).catch(()=>{
