@@ -6,6 +6,8 @@ import RegisterView from "@/views/RegisterView";
 import MainComp from "@/components/MainComp";
 import ProfileComp from "@/components/ProfileComp";
 import SubComp from "@/components/SubComp";
+import PermissionComp from "@/components/PermissionComp";
+import Error403Comp from "@/components/Error403Comp";
 
 Vue.use(VueRouter)
 
@@ -33,6 +35,18 @@ const routes = [
         name: 'profile',
         meta: { title: 'profile' },
         component: ProfileComp
+      },
+      {
+        path: '/permission',
+        name: 'permission',
+        meta: { title: 'permission' },
+        component: PermissionComp
+      },
+      {
+        path: '/403',
+        name: '403',
+        meta: { title: '403' },
+        component: Error403Comp
       },
     ]
   },

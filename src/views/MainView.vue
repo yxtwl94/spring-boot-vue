@@ -22,10 +22,10 @@
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-eleme"/>
-              <span>导航2</span>
+              <span>管理</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="/main">Main</el-menu-item>
+              <el-menu-item index="/permission">用户权限</el-menu-item>
               <el-menu-item index="/sub">Sub</el-menu-item>
             </el-menu-item-group>
           </el-submenu>

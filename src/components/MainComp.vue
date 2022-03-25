@@ -37,7 +37,7 @@ import {getUserNum} from "@/api/profile";
 export default {
   name: 'MainComp',
   mounted() {
-    getUserNum().then(
+    getUserNum("").then(
         (res)=>{
           this.userNum = res.data.data
         }

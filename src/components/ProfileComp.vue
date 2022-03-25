@@ -58,6 +58,7 @@ export default {
     },
     submit(){
       const json = {
+        "username": this.username,
         "nickname": this.nickname,
       }
       editUser(json).then(
