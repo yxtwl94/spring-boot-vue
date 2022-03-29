@@ -111,6 +111,7 @@ export default {
   color: #3e71e0;
   text-align: center;
   padding: 10px;
+  height: calc(100vh - 60px);
 }
 .el-dropdown{
   height: 100%;

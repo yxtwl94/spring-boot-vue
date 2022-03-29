@@ -5,6 +5,7 @@ module.exports = defineConfig({
     port: 8080,
     proxy:{
       '/api':{
+        // target:'http://123.57.225.240:3010/', // 后台接口地址
         target:'http://localhost:3010/', // 后台接口地址
         changeOrigin: true,  //允许跨域
         pathRewrite:{
