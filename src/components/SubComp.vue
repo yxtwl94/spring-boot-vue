@@ -1,40 +1,90 @@
 <template>
   <div>
-    <el-table :data="tableData"
-              width="100%"
-              border stripe>
-      <el-table-column
-          prop="id"
-          label="id">
-      </el-table-column>
-      <el-table-column
-          prop="name"
-          label="名字">
-      </el-table-column>
-      <el-table-column
-          fixed="right"
-          label="操作"
-          width="100">
-        <template v-slot="scope">
-          <el-button @click="handleShowClick(scope.row)" type="text" size="small">查看</el-button>
-          <el-button @click="handleDelClick(scope.row)" type="text" size="small">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <el-upload
+        class="upload"
+        drag
+        action="/api/tools/uploadFile/"
+        :on-remove="handleRemove"
+        :on-success="handleSuccess"
+        :limit="1"
+        :on-exceed="handleExceed"
+        :file-list="fileList">
+      <i class="el-icon-upload"></i>
+      <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+      <div class="el-upload__tip" slot="tip">只能上传csv文件</div>
+    </el-upload>
+
+    <!--chart-->
+    <div id="chart" style="width: 100%;height:400px;"></div>
   </div>
 </template>
 
 <script>
+import {Message} from "element-ui";
+import * as echarts from "_echarts@5.3.2@echarts";
+
 export default {
   name: "SubComp",
+  data: function () {
+    return {
+      fileList: [],
+      fileData: {},
+    };
+  },
   methods:{
-    getTable(){
+    handleExceed(files) {
+      Message({
+        message: '当前限制选择 ' + files.length + ' 个文件',
+        type: 'warning'
+      });
     },
-    handleShowClick(param){
-      console.log(param)
+    handleRemove(file) {
+      console.log(file);
     },
-    handleDelClick(param){
-      console.log(param)
+    handleSuccess(res) {
+      this.drawChart(res.data);
+    },
+    drawChart(data){
+      console.log(data)
+      // 初始化echarts实例
+      var myChart = echarts.init(document.getElementById('chart'));
+      // 绘制图表
+      var series = []
+      for (const key in data) {
+        series.push({
+          type: 'line',
+          data: data[key]
+        })
+      }
+      myChart.setOption({
+        title: {
+          text: '文件展示'
+        },
+        tooltip: {
+          trigger: 'axis',
+          // 缩放
+          zoom: true,
+        },
+        toolbox:{
+          feature:{
+            dataZoom:{
+              yAxisIndex: 'none'
+            },
+            restore:{},
+            saveAsImage:{}
+          }
+        },
+        legend: {},
+        xAxis: {
+          type: 'category',
+        },
+        yAxis: {},
+        series: series
+      });
+      // echarts大小自适应
+      window.addEventListener('resize', function () {
+        myChart.resize();
+      });
     }
   }
 }

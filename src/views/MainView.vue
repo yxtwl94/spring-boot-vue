@@ -16,7 +16,7 @@
             </template>
             <el-menu-item-group>
               <el-menu-item index="/main">Main</el-menu-item>
-              <el-menu-item index="/sub">Sub</el-menu-item>
+              <el-menu-item index="/sub">折线图工具</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
@@ -26,7 +26,6 @@
             </template>
             <el-menu-item-group>
               <el-menu-item index="/permission">用户权限</el-menu-item>
-              <el-menu-item index="/sub">Sub</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -131,10 +130,10 @@ export default {
 /*设置选中el-menu-item时的样式*/
 .el-menu-item:hover{
   color: #1787FB !important;
-  background-color: black !important;
+  background-color: #1f2d3d !important;
 }
 .el-menu-item{
-  background-color: #333333 !important;
+  background-color: #1f2d3d !important;
 }
 /*导航栏展开自定义宽度*/
 .el-menu-vertical:not(.el-menu--collapse) {

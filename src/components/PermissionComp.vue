@@ -50,7 +50,7 @@
                      size="mini"
                      @click="cancel(scope.row)">取消</el-button>
           <el-popconfirm v-else @confirm="handleDelete(scope.row.username)"
-              title="这是一段内容确定删除吗？">
+              title="确定删除吗？">
             <el-button size="mini" type="danger"
                 slot="reference">
               删除
@@ -163,5 +163,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>
