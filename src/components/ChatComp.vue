@@ -4,18 +4,22 @@
     <el-input v-model="message"></el-input>
     <el-button type="primary" @click="sendMsg">发送消息</el-button>
 <!--    聊天框-->
-    <div>
-      {{message}}
+    <div v-for="(msg, i) in msgList" :key="i">
+      <p>{{msg}}</p>
     </div>
   </div>
 </template>
 
 <script>
+import store from "@/store";
+
+
 export default {
   name: "ChatComp",
   data() {
     return {
       message: "",
+      msgList: [],
       isConnected: false,
       ws: null
     };
@@ -30,7 +34,7 @@ export default {
     initWS(){
       const _this = this;
       // 初始化websocket
-      _this.ws = new WebSocket("ws://localhost:8080/ws");
+      _this.ws = new WebSocket("ws://localhost:3010/ws");
       // 当socket连接打开时，输出连接成功
       _this.ws.onopen = function () {
         console.log("连接成功");
@@ -44,12 +48,21 @@ export default {
       };
     },
     sendMsg() {
+      // 前端发送消息
       const _this = this;
-      _this.ws.send(this.message);
+      if (this.message){
+        const nickname = store.state.nickname;
+        _this.ws.send(nickname + ":"+this.message);
+      }
     },
     // websocket接收到消息
-    onWebSocketMsg(msg){
-      console.log(msg.data)
+    onWebSocketMsg(msgList){
+      // 解析消息
+      const _this = this;
+      _this.msgList = []
+      JSON.parse(msgList.data).forEach(function (msg) {
+        _this.msgList.push(msg);
+      });
     }
   },
 }

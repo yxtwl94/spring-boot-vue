@@ -61,6 +61,7 @@ export default {
         "username": this.username,
         "nickname": this.nickname,
       }
+      console.log(json)
       editUser(json).then(
         (res)=> {
           if (res.data.code === 200){
@@ -96,7 +97,8 @@ export default {
   data(){
     return{
       showDialog: false,
-      nickname: this.$store.state.nickname
+      nickname: this.$store.state.nickname,
+      username: this.$store.state.username,
     }
   }
 }

@@ -9,7 +9,6 @@ const whiteList = ['/login', '/register'] // 白名单，可以直接访问
 
 // 路由拦截器，和请求拦截器是两个东西
 router.beforeEach( (to, from, next) => {
-    console.log("在这里做权限判断,一般是请求一个token")
     NProgress.start()
 
     if (whiteList.indexOf(to.path) !== -1){
@@ -23,7 +22,6 @@ router.beforeEach( (to, from, next) => {
                 store.commit("setNickName", res.data.data.nickname)
                 store.commit("setUserName", res.data.data.username)
                 store.commit("setRole", res.data.data.role)
-                console.log(to, res.data)
                 // 不用路由表，单独对这个进行权限管理
                 if (to.path === "/permission"){
                     if (res.data.data.role === "admin"){
