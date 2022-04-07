@@ -13,7 +13,12 @@ export default {
   data(){
     return{
     }
-  }
+  },
+  mounted() {
+    this.getCurrentPosition()
+  },
+  methods: {
+  },
 }
 </script>
 

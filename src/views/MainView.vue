@@ -16,7 +16,9 @@
             </template>
             <el-menu-item-group>
               <el-menu-item index="/main">Main</el-menu-item>
-              <el-menu-item index="/sub">折线图工具</el-menu-item>
+              <el-menu-item index="/csvTool">折线图工具</el-menu-item>
+              <el-menu-item index="/mapTool">地图工具</el-menu-item>
+              <el-menu-item index="/chat">在线聊天</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">

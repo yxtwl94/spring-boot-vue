@@ -44,18 +44,30 @@ export default {
         "username": _this.username,
         "password": _this.password
       }
+      // loading开始
+      _this.$loading({
+        lock: true,
+        text: 'Loading',
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)'
+      });
+
       login(user_json).then( (res)=>{
         //  用用户名密码请求token
         if (res.data.code === 200){
           // expire 为0代表回话有效期
           _this.$cookies.set("user_token", res.data.data, 0)
           _this.$router.push('/main')
+          // loading结束
+          _this.$loading().close();
         } else {
           Message({
             message: '登陆失败，用户密码错误',
             type: 'error',
             duration: 5*1000
           })
+          // loading结束
+          _this.$loading().close();
         }
       }).catch(
           () =>{
@@ -64,6 +76,8 @@ export default {
               type: 'warning',
               duration: 5*1000
             })
+            // loading结束
+            _this.$loading().close();
           }
 
       )

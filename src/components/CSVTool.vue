@@ -21,10 +21,11 @@
 
 <script>
 import {Message} from "element-ui";
-import * as echarts from "_echarts@5.3.2@echarts";
+import * as echarts from "echarts";
+
 
 export default {
-  name: "SubComp",
+  name: "CSVTool",
   data: function () {
     return {
       fileList: [],

@@ -5,9 +5,11 @@ import LoginView from "@/views/LoginView";
 import RegisterView from "@/views/RegisterView";
 import MainComp from "@/components/MainComp";
 import ProfileComp from "@/components/ProfileComp";
-import SubComp from "@/components/SubComp";
+import CSVTool from "@/components/CSVTool";
 import PermissionComp from "@/components/PermissionComp";
 import Error403Comp from "@/components/Error403Comp";
+import MapTool from "@/components/MapTool";
+import ChatComp from "@/components/ChatComp";
 
 Vue.use(VueRouter)
 
@@ -25,10 +27,22 @@ const routes = [
         component: MainComp
       },
       {
-        path: '/sub',
-        name: 'sub',
-        meta: { title: 'sub' },
-        component: SubComp
+        path: '/csvTool',
+        name: 'csvTool',
+        meta: { title: 'csvTool' },
+        component: CSVTool
+      },
+      {
+        path: '/mapTool',
+        name: 'mapTool',
+        meta: { title: 'mapTool' },
+        component: MapTool
+      },
+      {
+        path: '/chat',
+        name: 'chat',
+        meta: { title: 'chat' },
+        component: ChatComp
       },
       {
         path: '/profile',
