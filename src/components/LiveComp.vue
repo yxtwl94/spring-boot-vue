@@ -1,7 +1,7 @@
 <template>
   <div style="display: flex;align-items: center;justify-content: center;">
 <!--    居中显示-->
-    <video-player ref="videoPlayer"
+    <video-player ref="myPlayer"
                   :options="playerOptions"
                   :playsinline="true"
                   @play="onPlay">
@@ -18,18 +18,25 @@ import { videoPlayer } from 'vue-video-player/src'
 
 export default {
   name: "LiveComp",
+  mounted() {
+  },
   components: {
     videoPlayer
   },
   methods: {
     onPlay() {
       console.log('play');
-    }
+    },
+    // 获取屏幕宽度
+    getScreenWidth() {
+      return document.body.clientWidth;
+    },
   },
   data() {
     return {
       playerOptions: {
-        height: '360',
+        // 长宽自适应
+        width: this.getScreenWidth()*0.5,
         autoplay: false,
         muted: true,
         controls: true,
