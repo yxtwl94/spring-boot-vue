@@ -10,6 +10,7 @@ import PermissionComp from "@/components/PermissionComp";
 import Error403Comp from "@/components/Error403Comp";
 import MapTool from "@/components/MapTool";
 import ChatComp from "@/components/ChatComp";
+import LiveComp from "@/components/LiveComp";
 
 Vue.use(VueRouter)
 
@@ -43,6 +44,12 @@ const routes = [
         name: 'chat',
         meta: { title: 'chat' },
         component: ChatComp
+      },
+      {
+        path: '/live',
+        name: 'live',
+        meta: { title: 'live' },
+        component: LiveComp
       },
       {
         path: '/profile',

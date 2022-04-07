@@ -12,16 +12,25 @@
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-eleme"/>
-              <span>导航1</span>
+              <span>总览</span>
             </template>
             <el-menu-item-group>
               <el-menu-item index="/main">Main</el-menu-item>
-              <el-menu-item index="/csvTool">折线图工具</el-menu-item>
-              <el-menu-item index="/mapTool">地图工具</el-menu-item>
-              <el-menu-item index="/chat">在线聊天</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
+            <template slot="title">
+              <i class="el-icon-eleme"/>
+              <span>工具</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="/csvTool">折线图工具</el-menu-item>
+              <el-menu-item index="/mapTool">地图工具</el-menu-item>
+              <el-menu-item index="/chat">在线聊天</el-menu-item>
+              <el-menu-item index="/live">直播</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+          <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-eleme"/>
               <span>管理</span>
