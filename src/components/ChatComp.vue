@@ -1,12 +1,18 @@
 <template>
   <div id="chat">
-<!--    按钮-->
-    <el-input v-model="message"></el-input>
-    <el-button type="primary" @click="sendMsg">发送消息</el-button>
-<!--    聊天框-->
-    <div v-for="(msg, i) in msgList" :key="i">
-      <p>{{msg}}</p>
+    <div id="msg" style="height:400px;overflow-y: scroll">
+      <div v-for="(msg, i) in msgList" :key="i">
+        <p style="display: flex">{{msg}}</p>
+      </div>
     </div>
+    <el-row>
+      <el-col :span="20">
+        <el-input v-model="message" @keyup.enter.native="sendMsg"></el-input>
+      </el-col>
+      <el-col :span="4">
+        <el-button type="primary" @click="sendMsg">发送</el-button>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -33,8 +39,13 @@ export default {
   methods: {
     initWS(){
       const _this = this;
+      // 如果不支持 WebSocket
+      if (!("WebSocket" in window)) {
+        alert("您的浏览器不支持 WebSocket!");
+        return;
+      }
       // 初始化websocket
-      _this.ws = new WebSocket("ws://localhost:3010/ws");
+      _this.ws = new WebSocket("ws://192.168.31.51:3010/ws");
       // 当socket连接打开时，输出连接成功
       _this.ws.onopen = function () {
         console.log("连接成功");
@@ -54,6 +65,8 @@ export default {
         const nickname = store.state.nickname;
         _this.ws.send(nickname + ":"+this.message);
       }
+      // 清空输入框
+      _this.message = "";
     },
     // websocket接收到消息
     onWebSocketMsg(msgList){
@@ -63,11 +76,16 @@ export default {
       JSON.parse(msgList.data).forEach(function (msg) {
         _this.msgList.push(msg);
       });
-    }
+      // 滚动条滚动到底部
+      _this.$nextTick(function () {
+        const msg = document.getElementById("msg");
+        msg.scrollTop = msg.scrollHeight;
+      });
+    },
+
   },
 }
 </script>
 
 <style scoped>
-
 </style>
