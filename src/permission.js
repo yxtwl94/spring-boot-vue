@@ -18,19 +18,27 @@ router.beforeEach( (to, from, next) => {
     } else {
         // 如果请求其他主页面，需要鉴权
         getUserInfo().then(
+
             (res)=>{
-                store.commit("setNickName", res.data.data.nickname)
+                console.log(res)
+                store.commit("setNickName", res.data.data.user.nickname)
                 store.commit("setUserName", res.data.data.username)
-                store.commit("setRole", res.data.data.role)
+                store.commit("setAuthorities", res.data.data.authorities)
                 // 不用路由表，单独对这个进行权限管理
                 if (to.path === "/permission"){
-                    if (res.data.data.role === "admin"){
-                        next()
-                        NProgress.done()
-                    } else{
-                        next({path: '/403'})
-                        NProgress.done()
+                    let auth = res.data.data.authorities
+                    for (let i = 0; i < auth.length; i++) {
+                        const curAuth = auth[i].authority
+                        if (curAuth === "ROLE_admin") {
+                            next()
+                            NProgress.done()
+                            return
+                        }
                     }
+                    // 如果没有权限，跳转到403页面
+                    next({path: '/403'})
+                    NProgress.done()
+
                 } else {
                     next()
                     NProgress.done()

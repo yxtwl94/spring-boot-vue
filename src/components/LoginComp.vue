@@ -9,7 +9,7 @@
     </el-row>
 
     <el-row>
-      <el-input v-model="password" placeholder="请输入密码" show-password></el-input>
+      <el-input v-model="password" placeholder="请输入密码" show-password @keyup.enter.native="login"></el-input>
     </el-row>
 
     <el-row style="display: flex;width: 100%;flex-direction: row;justify-content: space-between;">

@@ -30,7 +30,7 @@
           昵称： {{this.$store.state.nickname}}
         </div>
         <div class="item">
-          权限： {{this.$store.state.role}}
+          权限： {{this.$store.state.authorities}}
         </div>
       </el-card>
     </el-main>

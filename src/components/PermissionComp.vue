@@ -77,6 +77,10 @@ import {deleteUser, editUser, getUserNum, getUserPage} from "@/api/profile";
 export default {
   name: "PermissionComp",
   mounted() {
+    // 获取路径参数
+    this.currentPage = this.$route.query.page || 1;
+    // 转换为数字
+    this.currentPage = Number(this.currentPage);
     this.getTableData()
   },
   methods:{
@@ -94,7 +98,10 @@ export default {
             console.log(res)
             this.getTableData()
             this.$set(row, 'isEdit', false)
-            this.$store.commit("setRole", row.role)
+            const auth = {
+              "authority": "ROLE_" + row.role
+            }
+            this.$store.commit("setAuthorities", [auth])
             this.$store.commit("setNickName", row.nickname)
           }
       )
@@ -112,7 +119,6 @@ export default {
       // 获取所有用户量
       getUserNum(this.search_username).then(
           (res)=>{
-            console.log(res)
             this.userNum = res.data.data
           }
       )
@@ -132,13 +138,26 @@ export default {
     handleCurrentChange(curPage){
       // 获取分页用户信息
       this.currentPage = curPage
-      this.getTableData()
+      this.$router.push({path: '/permission', query: {page: curPage}})
+      // this.getTableData()
     },
     handleSizeChange(pageSize){
       // 获取分页用户信息
       this.pageSize = pageSize
       this.getTableData()
     },
+  },
+  watch: {
+    // 当路由变化时，获取路由参数
+    '$route.query.page': function (newVal, oldVal) {
+      if (newVal){
+        console.log(newVal, oldVal)
+        this.currentPage = newVal
+        // 转换为数字
+        this.currentPage = Number(this.currentPage)
+        this.getTableData()
+      }
+    }
   },
   data(){
     return{
